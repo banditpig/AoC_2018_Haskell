@@ -10,9 +10,10 @@ countMatches mp (x:xs) = countMatches mp' xs  where
     mp' = M.insertWith (+) x 1 mp 
 
 threesAndTwos ::  M.Map Char Int -> (Int, Int)
-threesAndTwos mp = (twos, threes) where 
-    twos   = if 2 `elem` M.elems mp then 1 else 0
+threesAndTwos mp = (threes, twos) where 
     threes = if 3 `elem` M.elems mp then 1 else 0
+    twos   = if 2 `elem` M.elems mp then 1 else 0
+    
 
 sumAndMult :: [(Int, Int)] -> Int
 sumAndMult pairs = a * b where 
@@ -27,7 +28,7 @@ compareCodes (x:xs)
     | length resList == 1 = head resList
     | otherwise = compareCodes xs 
     where 
-       resList = [ s | s <-  map (`strDiff` x) xs, length s  == 25] 
+      resList = [ s | s <-  map (`strDiff` x) xs, length s  == 25] 
 
        
 part1 :: [String] -> Int
@@ -40,4 +41,4 @@ main :: IO ()
 main = 
     readFile "Day2.txt" >>= \d -> do
            print $ part1 (lines d)
-           print $  part2 (lines d)
+           print $ part2 (lines d)
